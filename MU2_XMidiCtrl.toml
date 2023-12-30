@@ -1,0 +1,198 @@
+#----------------------------------------------------------------------------------------------------------------------
+# XMidiCtrl Aircraft Profile
+#
+# Configuration for the TOGA Simulations MU-2 Marquise
+#
+# Created by Marco Auer (VirtualCPT) for the XMidiCtrl plugin
+# 
+# How to use:
+#   1. Copy this file into the profile directory of XMidiCtrl
+#   2. Adjust the port_in and port_out variables
+#----------------------------------------------------------------------------------------------------------------------
+# Version 1.01
+#  + Updated for XMidiCtrl 1.14
+#----------------------------------------------------------------------------------------------------------------------
+# Version 1.00
+#  + Initial version
+#----------------------------------------------------------------------------------------------------------------------
+title      = "Mitsubishi MU-2B-60"
+version    = "1.01"
+
+# Behringer X-Touch Mini
+[[device]]
+name         = "Behringer X-Touch Mini"
+sl_dataref   = "xmidictrl/sublayer"
+port_in      = 0
+port_out     = 1
+mapping_init = [
+  # Encoder Lights
+  { ch = 1, cc = 1, data_2 = 2 },
+  { ch = 1, cc = 2, data_2 = 2 },
+  { ch = 1, cc = 3, data_2 = 2 },
+  { ch = 1, cc = 4, data_2 = 2 },
+  { ch = 1, cc = 5, data_2 = 2 },
+  { ch = 1, cc = 6, data_2 = 2 },
+  { ch = 1, cc = 7, data_2 = 2 },
+  { ch = 1, cc = 8, data_2 = 2 }
+]
+mapping_in = [
+  #--------------------------------------------------------------------------------------------------------------------
+  # Layer A
+  #--------------------------------------------------------------------------------------------------------------------
+  
+  # Slider
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/pilot_instruments", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/sw_panels", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/engine_instruments", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/radios", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/overhead_panel", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 0, type = "sld", dataref = "xscenery/mu2b60/manips/lights/copilot_instruments", value_min = 0, value_max = 1 },
+  
+  # Encoders
+  { ch = 11, cc = 1, type = "enc", dataref = "xscenery/mu2b60/manips/pilot_altimeter_baro_setting", modifier_up = 0.005, modifier_down = -0.005 },
+  { ch = 11, cc = 2, type = "enc", command_up = "sim/instruments/dh_ref_up", command_down = "sim/instruments/dh_ref_down" },
+  { ch = 11, cc = 3, type = "enc", command_up = "sim/radios/obs1_up", command_down = "sim/radios/obs1_down" },
+  { ch = 11, cc = 4, type = "enc", command_up = "sim/autopilot/heading_up", command_down = "sim/autopilot/heading_down" },
+  { ch = 11, cc = 5, type = "enc", command_up = "sim/autopilot/altitude_up", command_down = "sim/autopilot/altitude_down" },
+  { ch = 11, cc = 6, type = "enc", delay = 3, label = "cabin_air", dataref = "xscenery/mu2b60/manips/ram_air_knob", modifier_up = 1, modifier_down = -1, value_min = 0, value_max = 4 },
+  { ch = 11, cc = 7, type = "enc", dataref = "xscenery/mu2b60/manips/cabin_rate_knob", modifier_up = 0.01, modifier_down = -0.01, value_min = 0, value_max = 1 },
+  { ch = 11, cc = 8, type = "enc", dataref = "xscenery/mu2b60/manips/cabin_alt_knob", modifier_up = 100, modifier_down = -100, value_min = -1000, value_max = 10500 },
+
+  # Encoder Buttons
+  { ch = 11, cc = 11, type = "cmd", command = "xscenery/mu2b60/ap_nav_mode_button" },
+  { ch = 11, cc = 12, type = "cmd", command = "xscenery/mu2b60/ap_hdg_mode_button" },
+  { ch = 11, cc = 13, type = "cmd", command = "xscenery/mu2b60/ap_altsel_mode_button" },
+      
+  # Buttons Upper Row
+  { ch = 11, cc = 17, type = "cmd", command = "xscenery/mu2b60/master_caution_push" },
+  { ch = 11, cc = 18, type = "cmd", command = "xscenery/mu2b60/soft_ride_button" },
+  { ch = 11, cc = 19, type = "cmd", command = "xscenery/mu2b60/toggle_gpss_hdg" },
+  { ch = 11, cc = 20, type = "cmd", command = "xscenery/mu2b60/ap_alt_mode_button" },
+  { ch = 11, cc = 21, type = "cmd", command = "xscenery/mu2b60/ap_altsel_mode_button" },
+  { ch = 11, cc = 22, type = "cmd", command = "xscenery/mu2b60/ap_vs_mode_button" },
+  { ch = 11, cc = 23, type = "cmd", command = "xscenery/mu2b60/ap_ias_mode_button" },
+  { ch = 11, cc = 24, type = "cmd", command = "xscenery/mu2b60/ap_sby_mode_button" },
+  
+  # Buttons Lower Row
+  { ch = 11, cc = 25, type = "cmd", command = "xscenery/mu2b60/ap_button" },
+  { ch = 11, cc = 26, type = "cmd", command = "xscenery/mu2b60/yaw_button" },
+  { ch = 11, cc = 27, type = "drf", dataref = "xscenery/mu2b60/manips/prop_sync_button", value_on = "2", value_off = "0" },
+  { ch = 11, cc = 28, type = "cmd", command = "xscenery/mu2b60/ap_hdg_mode_button" },
+  { ch = 11, cc = 29, type = "cmd", command = "xscenery/mu2b60/ap_nav_mode_button" },
+  { ch = 11, cc = 30, type = "cmd", command = "xscenery/mu2b60/ap_apr_mode_button" },
+  { ch = 11, cc = 31, type = "cmd", command = "xscenery/mu2b60/ap_bc_mode_button" },
+  { ch = 11, cc = 32, type = "cmd", command = "xscenery/mu2b60/ap_vorapp_mode_button" },
+
+  #--------------------------------------------------------------------------------------------------------------------
+  # Layer B
+  #--------------------------------------------------------------------------------------------------------------------
+
+  # Slider
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/pilot_instruments", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/sw_panels", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/engine_instruments", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/radios", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/overhead_panel", value_min = 0, value_max = 1 },
+  { ch = 11, cc = 50, type = "sld", dataref = "xscenery/mu2b60/manips/lights/copilot_instruments", value_min = 0, value_max = 1 },
+
+  # Encoders
+  { ch = 11, cc = 51, type = "enc", dataref = "xscenery/mu2b60/manips/pilot_altimeter_bug_knob", modifier_up = 1, modifier_down = -1 },  
+  { ch = 11, cc = 52, type = "enc", command_up = "sim/radios/actv_adf1_hundreds_thous_up", command_down = "sim/radios/actv_adf1_hundreds_thous_down" },
+  { ch = 11, cc = 53, type = "enc", command_up = "sim/radios/actv_adf1_tens_up", command_down = "sim/radios/actv_adf1_tens_down" },
+  { ch = 11, cc = 54, type = "enc", command_up = "sim/radios/actv_adf1_ones_up", command_down = "sim/radios/actv_adf1_ones_down" },
+  { ch = 11, cc = 55, sl = "0", type = "enc", command_up = "sim/GPS/g430n1_coarse_up", command_down = "sim/GPS/g430n1_coarse_down" }, 
+  { ch = 11, cc = 55, sl = "1", type = "enc", command_up = "sim/GPS/g430n2_coarse_up", command_down = "sim/GPS/g430n2_coarse_down" }, 
+  { ch = 11, cc = 56, sl = "0", type = "enc", command_up = "sim/GPS/g430n1_fine_up", command_down = "sim/GPS/g430n1_fine_down" },
+  { ch = 11, cc = 56, sl = "1", type = "enc", command_up = "sim/GPS/g430n2_fine_up", command_down = "sim/GPS/g430n2_fine_down" },
+  { ch = 11, cc = 57, sl = "0", type = "enc", command_up = "sim/GPS/g430n1_chapter_up", command_down = "sim/GPS/g430n1_chapter_dn" },
+  { ch = 11, cc = 57, sl = "1", type = "enc", command_up = "sim/GPS/g430n2_chapter_up", command_down = "sim/GPS/g430n2_chapter_dn" },
+  { ch = 11, cc = 58, sl = "0", type = "enc", command_up = "sim/GPS/g430n1_page_up", command_down = "sim/GPS/g430n1_page_dn" },
+  { ch = 11, cc = 58, sl = "1", type = "enc", command_up = "sim/GPS/g430n2_page_up", command_down = "sim/GPS/g430n2_page_dn" },
+
+  # Encoder Buttons
+  { ch = 11, cc = 63, sl = "0", type = "cmd", command = "sim/GPS/g430n1_nav_com_tog" },
+  { ch = 11, cc = 63, sl = "1", type = "cmd", command = "sim/GPS/g430n2_nav_com_tog" },  
+  { ch = 11, cc = 64, sl = "0", type = "cmd", command = "sim/GPS/g430n1_com_ff" },
+  { ch = 11, cc = 64, sl = "1", type = "cmd", command = "sim/GPS/g430n2_com_ff" },  
+  { ch = 11, cc = 65, sl = "0", type = "cmd", command = "sim/GPS/g430n1_nav_ff" },
+  { ch = 11, cc = 65, sl = "1", type = "cmd", command = "sim/GPS/g430n2_nav_ff" },
+  { ch = 11, cc = 66, sl = "0", type = "cmd", command = "sim/GPS/g430n1_cursor" },
+  { ch = 11, cc = 66, sl = "1", type = "cmd", command = "sim/GPS/g430n2_cursor" },
+ 
+  # Buttons Upper Row
+  { ch = 11, cc = 67, type = "cmd", command = "xmidictrl/toggle_sublayer" },
+  { ch = 11, cc = 68, type = "drf", dataref = "xscenery/mu2b60/manips/pilot_rmi_nav1_switch", value_on = "1", value_off = "0" },
+  { ch = 11, cc = 69, type = "drf", dataref = "xscenery/mu2b60/manips/pilot_rmi_nav2_switch", value_on = "1", value_off = "0" },  
+  { ch = 11, cc = 70, type = "pnp", command_push = "xscenery/mu2b60/audio_com1_button", command_pull = "xscenery/mu2b60/audio_com2_button" },
+  { ch = 11, cc = 71, sl = "0", type = "cmd", command = "sim/GPS/g430n1_zoom_in" },
+  { ch = 11, cc = 71, sl = "1", type = "cmd", command = "sim/GPS/g430n2_zoom_in" },
+  { ch = 11, cc = 72, sl = "0", type = "cmd", command = "sim/GPS/g430n1_zoom_out" },
+  { ch = 11, cc = 72, sl = "1", type = "cmd", command = "sim/GPS/g430n2_zoom_out" },
+  { ch = 11, cc = 73, sl = "0", type = "cmd", command = "sim/GPS/g430n1_direct" },
+  { ch = 11, cc = 73, sl = "1", type = "cmd", command = "sim/GPS/g430n2_direct" },
+  { ch = 11, cc = 74, sl = "0", type = "cmd", command = "sim/GPS/g430n1_menu" },
+  { ch = 11, cc = 74, sl = "1", type = "cmd", command = "sim/GPS/g430n2_menu" },
+  
+  # Buttons Lower Row
+  { ch = 11, cc = 75, sl = "0", type = "cmd", command = "sim/GPS/g430n1_cdi" },
+  { ch = 11, cc = 75, sl = "1", type = "cmd", command = "sim/GPS/g430n2_cdi" },
+  { ch = 11, cc = 76, sl = "0", type = "cmd", command = "sim/GPS/g430n1_obs" },
+  { ch = 11, cc = 76, sl = "1", type = "cmd", command = "sim/GPS/g430n2_obs" },
+  { ch = 11, cc = 77, sl = "0", type = "cmd", command = "sim/GPS/g430n1_msg" },
+  { ch = 11, cc = 77, sl = "1", type = "cmd", command = "sim/GPS/g430n2_msg" },
+  { ch = 11, cc = 78, sl = "0", type = "cmd", command = "sim/GPS/g430n1_fpl" },
+  { ch = 11, cc = 78, sl = "1", type = "cmd", command = "sim/GPS/g430n2_fpl" },
+  { ch = 11, cc = 79, sl = "0", type = "cmd", command = "sim/GPS/g430n1_vnav" },
+  { ch = 11, cc = 79, sl = "1", type = "cmd", command = "sim/GPS/g430n2_vnav" },
+  { ch = 11, cc = 80, sl = "0", type = "cmd", command = "sim/GPS/g430n1_proc" },
+  { ch = 11, cc = 80, sl = "1", type = "cmd", command = "sim/GPS/g430n2_proc" },
+  { ch = 11, cc = 81, sl = "0", type = "cmd", command = "sim/GPS/g430n1_clr" },
+  { ch = 11, cc = 81, sl = "1", type = "cmd", command = "sim/GPS/g430n2_clr" },
+  { ch = 11, cc = 82, sl = "0", type = "cmd", command = "sim/GPS/g430n1_ent" },
+  { ch = 11, cc = 82, sl = "1", type = "cmd", command = "sim/GPS/g430n2_ent" },
+] 
+mapping_out = [
+  #--------------------------------------------------------------------------------------------------------------------
+  # Layer A
+  #--------------------------------------------------------------------------------------------------------------------
+
+  # Encoders
+  { ch = 11, cc = 1, type = "con", data_2 = 0 },
+
+  # Buttons Upper Row
+  { ch = 11, cc = 17, type = "drf", dataref = "xscenery/mu2b60/annuns/master_caution_annun", value_off = "0" },
+  { ch = 11, cc = 18, type = "drf", dataref = "xscenery/mu2b60/annuns/soft_ride_on", value_off = "0" },
+  { ch = 11, cc = 19, type = "drf", dataref = "xscenery/mu2b60/annuns/gpss_hdg_mode_GPSS", value_off = "0" },
+  { ch = 11, cc = 20, type = "drf", dataref = "xscenery/mu2b60/annuns/alt_hold_on", value_off = "0" },
+  { ch = 11, cc = 21, type = "drf", dataref = ["xscenery/mu2b60/annuns/altsel_armed", "xscenery/mu2b60/annuns/altsel_captured"], value_off = "0" },
+  { ch = 11, cc = 22, type = "drf", dataref = "xscenery/mu2b60/annuns/vs_mode_on", value_off = "0" },
+  { ch = 11, cc = 23, type = "drf", dataref = "xscenery/mu2b60/annuns/ias_mode_on", value_off = "0" },
+  { ch = 11, cc = 24, type = "drf", dataref = "xscenery/mu2b60/annuns/sby_mode_on", value_off = "0" },
+
+  # Buttons Lower Row
+  { ch = 11, cc = 25, type = "drf", dataref = "xscenery/mu2b60/annuns/ap_servos_on", value_off = "0" },   
+  { ch = 11, cc = 26, type = "drf", dataref = "xscenery/mu2b60/annuns/yaw_damper_on", value_off = "0" },   
+  { ch = 11, cc = 27, type = "drf", dataref = "xscenery/mu2b60/anim/prop_sync_button", value_on = "2" },
+  { ch = 11, cc = 28, type = "drf", dataref = "xscenery/mu2b60/annuns/hdg_mode_on", value_off = "0" },
+  { ch = 11, cc = 29, type = "drf", dataref = ["xscenery/mu2b60/annuns/nav_mode_armed", "xscenery/mu2b60/annuns/nav_mode_captured"], value_off = "0" },
+  { ch = 11, cc = 30, type = "drf", dataref = ["xscenery/mu2b60/annuns/app_mode_armed", "xscenery/mu2b60/annuns/app_mode_captured"], value_off = "0" },
+  { ch = 11, cc = 31, type = "drf", dataref = ["xscenery/mu2b60/annuns/bc_mode_armed", "xscenery/mu2b60/annuns/bc_mode_captured"], value_off = "0" },
+  { ch = 11, cc = 32, type = "drf", dataref = ["xscenery/mu2b60/annuns/vorapp_mode_armed", "xscenery/mu2b60/annuns/vorapp_mode_captured"], value_off = "0" }
+
+  #--------------------------------------------------------------------------------------------------------------------
+  # Layer B
+  #--------------------------------------------------------------------------------------------------------------------
+
+  # Buttons Upper Row
+  { ch = 11, cc = 67, type = "drf", dataref = "xmidictrl/sublayer", value_on = "1" }
+]  
+
+[cabin_air]
+text = "Cabin Air:"
+values = [
+  { value = "0", text = "RAM" },
+  { value = "1", text = "OFF" },
+  { value = "2", text = "LH" },
+  { value = "3", text = "BOTH" },
+  { value = "4", text = "RH" }
+]
